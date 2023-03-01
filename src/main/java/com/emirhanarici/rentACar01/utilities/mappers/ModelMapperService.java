@@ -1,19 +1,16 @@
-package com.emirhanarici.rentACar01.core.utilities.mappers;
+package com.emirhanarici.rentACar01.utilities.mappers;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class ModelMapperServiceImpl implements ModelMapperService {
+public class ModelMapperService {
 
     private ModelMapper modelMapper;
 
-
-    @Override
     public ModelMapper forResponse() {
         this.modelMapper.getConfiguration()
                 .setAmbiguityIgnored(true)
@@ -21,7 +18,6 @@ public class ModelMapperServiceImpl implements ModelMapperService {
         return this.modelMapper;
     }
 
-    @Override
     public ModelMapper forRequest() {
         this.modelMapper.getConfiguration()
                 .setAmbiguityIgnored(true)
