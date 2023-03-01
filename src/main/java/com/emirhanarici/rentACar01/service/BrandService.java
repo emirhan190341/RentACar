@@ -1,13 +1,13 @@
-package com.emirhanarici.rentACar01.business.concretes;
+package com.emirhanarici.rentACar01.service;
 
-import com.emirhanarici.rentACar01.business.rules.BrandBusinessRules;
-import com.emirhanarici.rentACar01.core.utilities.mappers.ModelMapperService;
+import com.emirhanarici.rentACar01.rules.BrandBusinessRules;
 import com.emirhanarici.rentACar01.repository.BrandRepository;
 import com.emirhanarici.rentACar01.entities.Brand;
-import com.emirhanarici.rentACar01.business.requests.CreateBrandRequest;
-import com.emirhanarici.rentACar01.business.requests.UpdateBrandRequest;
-import com.emirhanarici.rentACar01.business.responses.GetAllBrandResponse;
-import com.emirhanarici.rentACar01.business.responses.GetByIdBrandResponse;
+import com.emirhanarici.rentACar01.dto.requests.CreateBrandRequest;
+import com.emirhanarici.rentACar01.dto.requests.UpdateBrandRequest;
+import com.emirhanarici.rentACar01.dto.responses.GetAllBrandResponse;
+import com.emirhanarici.rentACar01.dto.responses.GetByIdBrandResponse;
+import com.emirhanarici.rentACar01.utilities.mappers.ModelMapperService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

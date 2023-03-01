@@ -1,10 +1,12 @@
 package com.emirhanarici.rentACar01.controllers;
 
-import com.emirhanarici.rentACar01.business.abstracts.BrandService;
-import com.emirhanarici.rentACar01.requests.CreateBrandRequest;
-import com.emirhanarici.rentACar01.requests.UpdateBrandRequest;
-import com.emirhanarici.rentACar01.responses.GetAllBrandResponse;
-import com.emirhanarici.rentACar01.responses.GetByIdBrandResponse;
+import com.emirhanarici.rentACar01.service.BrandService;
+import com.emirhanarici.rentACar01.dto.requests.CreateBrandRequest;
+import com.emirhanarici.rentACar01.dto.requests.UpdateBrandRequest;
+import com.emirhanarici.rentACar01.dto.responses.GetAllBrandResponse;
+import com.emirhanarici.rentACar01.dto.responses.GetByIdBrandResponse;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,15 +14,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/brands")
+@AllArgsConstructor
 public class BrandsController {
 
 
     private BrandService brandService;
-
-    public BrandsController(BrandService brandService) {
-        this.brandService = brandService;
-    }
-
 
     @GetMapping()
     public List<GetAllBrandResponse> getAll() {
@@ -34,7 +32,7 @@ public class BrandsController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestBody CreateBrandRequest createBrandRequest) {
+    public void add(@RequestBody @Valid CreateBrandRequest createBrandRequest) {
         this.brandService.add(createBrandRequest);
     }
 

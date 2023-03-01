@@ -1,4 +1,4 @@
-package com.emirhanarici.rentACar01.business.requests;
+package com.emirhanarici.rentACar01.dto.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
