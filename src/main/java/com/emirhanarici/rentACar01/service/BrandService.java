@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class BrandService{
+public class BrandService {
 
     private BrandRepository brandRepository;
     private ModelMapperService modelMapperService;
@@ -27,39 +27,39 @@ public class BrandService{
 
         List<Brand> brands = brandRepository.findAll();
 
-        List<GetAllBrandResponse> brandsResponse = brands.stream()
+        return brands.stream()
                 .map(brand -> this.modelMapperService.forResponse()
                         .map(brand, GetAllBrandResponse.class)).collect(Collectors.toList());
-
-        return brandsResponse;
     }
 
 
     public GetByIdBrandResponse getById(int id) {
-       Brand brand =  this.brandRepository.findById(id).orElse(null);
+        Brand brand = this.brandRepository.findById(id).orElse(null);
 
-       GetByIdBrandResponse response = this.modelMapperService.forResponse().map(brand,GetByIdBrandResponse.class);
-
-        return response;
+        return this.modelMapperService.forResponse().map(brand, GetByIdBrandResponse.class);
     }
 
 
-    public void add(CreateBrandRequest createBrandRequest) {
+    public GetAllBrandResponse add(CreateBrandRequest createBrandRequest) {
 
         this.brandBusinessRules.checkIfBrandNameExists(createBrandRequest.getName());
 
         Brand brand
-                = this.modelMapperService.forRequest().map(createBrandRequest,Brand.class);
+                = this.modelMapperService.forRequest().map(createBrandRequest, Brand.class);
 
         this.brandRepository.save(brand);
+
+        return this.modelMapperService.forResponse().map(brand, GetAllBrandResponse.class);
     }
 
 
-    public void update(UpdateBrandRequest updateBrandRequest) {
+    public GetAllBrandResponse update(UpdateBrandRequest updateBrandRequest) {
 
-        Brand brand = this.modelMapperService.forRequest().map(updateBrandRequest,Brand.class);
+        Brand brand = this.modelMapperService.forRequest().map(updateBrandRequest, Brand.class);
 
         this.brandRepository.save(brand);
+
+        return this.modelMapperService.forResponse().map(brand,GetAllBrandResponse.class);
 
     }
 

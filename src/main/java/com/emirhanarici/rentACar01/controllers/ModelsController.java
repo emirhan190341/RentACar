@@ -29,5 +29,12 @@ public class ModelsController {
         this.modelService.add(createModelRequest);
     }
 
+    @GetMapping("/{modelId}")
+    public GetAllModelsResponse getOneModel(@PathVariable int modelId) {
+
+        return this.modelService.getModel(modelId);
+
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.emirhanarici.rentACar01.service;
 
+import com.emirhanarici.rentACar01.entities.Brand;
 import com.emirhanarici.rentACar01.repository.ModelRepository;
 import com.emirhanarici.rentACar01.entities.Model;
 import com.emirhanarici.rentACar01.dto.requests.CreateModelRequest;
@@ -22,11 +23,9 @@ public class ModelService  {
 
         List<Model> models = modelRepository.findAll();
 
-        List<GetAllModelsResponse> modelsResponse = models.stream()
+        return models.stream()
                 .map(model -> this.modelMapperService.forResponse()
                         .map(model, GetAllModelsResponse.class)).collect(Collectors.toList());
-
-        return modelsResponse;
     }
 
     public void add(CreateModelRequest createModelRequest) {
@@ -34,5 +33,14 @@ public class ModelService  {
         Model model = this.modelMapperService.forRequest().map(createModelRequest,Model.class);
         this.modelRepository.save(model);
 
+    }
+
+
+    public GetAllModelsResponse getModel(int  modelId) {
+
+
+        Model model =  this.modelRepository.findById(modelId).orElse(null);
+
+        return this.modelMapperService.forResponse().map(model,GetAllModelsResponse.class);
     }
 }

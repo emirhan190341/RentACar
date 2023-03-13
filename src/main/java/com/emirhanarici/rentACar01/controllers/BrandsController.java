@@ -8,6 +8,7 @@ import com.emirhanarici.rentACar01.dto.responses.GetByIdBrandResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,31 +21,41 @@ public class BrandsController {
 
     private BrandService brandService;
 
-    @GetMapping()
-    public List<GetAllBrandResponse> getAll() {
-        return brandService.getAll();
+    @GetMapping
+    public ResponseEntity<List<GetAllBrandResponse>> getAll() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(brandService.getAll());
     }
 
     @GetMapping("/{id}")
-    public GetByIdBrandResponse getById(@PathVariable int id) {
-        return brandService.getById(id);
+    public ResponseEntity<GetByIdBrandResponse> getById(@PathVariable int id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(brandService.getById(id));
     }
 
-    @PostMapping()
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestBody @Valid CreateBrandRequest createBrandRequest) {
-        this.brandService.add(createBrandRequest);
+    public ResponseEntity<GetAllBrandResponse> add(@RequestBody @Valid CreateBrandRequest createBrandRequest) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(brandService.add(createBrandRequest));
+
     }
 
     @PutMapping
-    public void update(@RequestBody UpdateBrandRequest updateBrandRequest) {
+    public ResponseEntity<GetAllBrandResponse> update(@RequestBody UpdateBrandRequest updateBrandRequest) {
 
-        this.brandService.update(updateBrandRequest);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(brandService.update(updateBrandRequest));
+
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
+    public ResponseEntity<Void> delete(@PathVariable int id) {
         this.brandService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

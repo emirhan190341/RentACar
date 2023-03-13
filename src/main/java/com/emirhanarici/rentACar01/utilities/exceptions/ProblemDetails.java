@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProblemDetails {
 
-    String message;
+   private String message;
 }
